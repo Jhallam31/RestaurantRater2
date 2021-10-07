@@ -1,0 +1,120 @@
+﻿@model RestaurantRater2.Models.Restaurant
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Restaurant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reviews)
+        </dt>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Address
+                    </th>
+
+                </tr>
+                @foreach (var item in Model.Reviews)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DineDate)
+                        </td>
+
+                        <td>
+                            <!-- Button trigger modal -->
+
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">
+                                View Details
+                            </button>
+                            <!--Begin Modal-->
+                            <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="reviewModalTitle">Review details</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @{
+
+
+                                                Html.RenderPartial("ReviewModal", item);
+                                            }
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        @*@foreach (var item in Model.Reviews)
+        {
+            <dl>
+
+                <dt>
+
+                    @Html.DisplayNameFor(modelItem => item.Title)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(modelItem => item.DineDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(modelItem => item.DineDate)
+                </dd>
+
+                <dd>
+                    
+                </dd>
+
+            </dl>
+        }
+
+    </dl>
+</div>*@
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RestaurantId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
